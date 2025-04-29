@@ -1,0 +1,45 @@
+.image-gallery {
+    margin: 100px;
+    overflow: auto;
+    height: 500px;
+}
+
+#my-dropzone {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+
+
+}
+
+.dropzone {
+    min-height: 0px;
+    height: 99px !important;
+}
+
+.file-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box1 {
+    /* background: antiquewhite; */
+    width: 349px;
+    margin: auto;
+    box-shadow: 8px 15px 82px #d0d0d0;
+    padding: 34px;
+    
+}
+i.bi.bi-download {
+    margin: 12px;
+    color: green;
+}
+/* .upload_gif {
+    display: none;
+}
+
+.file-upload:hover .upload_gif {
+    display: block;
+} */
