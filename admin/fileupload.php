@@ -24,17 +24,23 @@
             Dropzone.autoDiscover = false;
 
             var myDropzone = new Dropzone(".dropzone", {
-                  paramName: "files",
-                  uploadMultiple: true,
-                  url: "upload.php",
-                  parallelUploads: 20,
-                  uploadMultiple: true,
-                  // acceptedFiles: '.png,.jpeg,.jpg',
-                  autoProcessQueue: true,
-                  addRemoveLinks: true
-            });
-            // $('#uploadFile').click(function() {
-            //       myDropzone.processQueue();
-            // });
+                              paramName: "files",
+                              uploadMultiple: true,
+                              url: "upload.php",
+                              parallelUploads: 3,
+                              uploadMultiple: true,
+                              autoProcessQueue: true,
+                              addRemoveLinks: true,
+                              maxFiles: 3,
+                              init: function() {
+                                    this.on("maxfilesexceeded", function(file) {
+                                          this.removeFile(file); // Optional: remove the excess file  
+                                    });
+                                    $.alert('Maximum 3 Files Can Upload');
+                              }
+                              });
+                        // $('#uploadFile').click(function() {
+                        //       myDropzone.processQueue();
+                        // });
       </script>
       <!--end::footer-->

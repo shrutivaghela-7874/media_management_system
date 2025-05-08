@@ -6,7 +6,14 @@
       <!--end::sidebar-->
       <!--begin::App Main-->
       <main class="app-main">
-          <button id="btn_download">download</button>
+          <div class="btn_down_dang d-flex justify-content-end me-8">
+
+              <button type="button" class="btn btn-outline-danger me-3" id="btn_selected_delete">Delete</button>
+              <button type="button" class="btn btn-outline-primary me-3" id="btn_download">Download</button>
+
+              <button type="button" class="btn btn-outline-secondary me-3" id="btn_all_select">Select All</button>
+              <button type="button" class="btn btn-outline-secondary me-3" id="btn_all_unselect">Unselect</button>
+          </div>
           <div class="image-gallery">
 
               <?php
@@ -18,13 +25,12 @@
                     if ($y != $b && $y != $a) {
 
                 ?>
-                      <input type="checkbox" name="<?= $y ?>" value="<?= $y ?>">Option 1
 
-                      <div class="border rounded d-flex align-items-center p-2 mb-2">
-                          <!-- <a href="uploads/<?= $y ?>">
-                              <img src="uploads/<?= $y ?>" alt="Preview" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;">
-                          </a> -->
-                          <a href="uploads/<?= $y ?>" class="text-decoration-none me-auto"><?= $y ?></a>
+
+
+                      <div class="border rounded d-flex align-items-center p-2  mb-2">
+                          <input type="checkbox" name="<?= $y ?>" value="<?= $y ?>" class="me-3">
+                          <a href="uploads/<?= $y ?>" target="_blank" class="text-decoration-none me-auto"><?= $y ?></a>
                           <a href="uploads/<?= $y ?>" download="">
                               <i class="bi bi-download"></i>
                           </a>
@@ -35,6 +41,8 @@
                               <i class="bi bi-trash"></i>
                           </button>
                       </div>
+
+
 
 
               <?php
@@ -61,7 +69,7 @@
                       console.log(link);
                       $('a').attr("download", fileName);
                       link.click();
-                      // document.body.removeChild(link);
+                      document.body.removeChild(link);
                   });
 
               });
@@ -97,8 +105,6 @@
                                           console.log(xhr);
                                       }
                                   });
-
-                                  $.alert('Image Deleted!');
                               }
                           },
                           cancelAction: function() {
@@ -107,6 +113,68 @@
                       }
                   });
 
+              });
+
+
+
+
+
+
+
+
+
+              $('#btn_selected_delete').click(function() {
+                  let checkedValues = $('input[type="checkbox"]:checked').map(function() {
+                      return this.value;
+                  }).get();
+
+                  $.confirm({
+                      title: 'Delete file?',
+                      autoClose: 'cancelAction|8000',
+                      buttons: {
+                          deleteUser: {
+
+                              action: function() {
+
+                                  $.ajax({
+                                      url: './delete.php',
+                                      method: 'POST',
+                                      dataType: 'json',
+                                      data: {
+                                          'arr': checkedValues,
+                                          'action': 'delete_selected_image'
+                                      },
+                                      success: function(response) {
+                                          // console.log(response);
+                                          $.alert('Image is Deleted');
+                                          setTimeout(function() {
+                                              location.reload()
+                                          }, 2000);
+
+
+                                      },
+                                      error: function(xhr, status, err) {
+                                          console.log(xhr);
+                                      }
+                                  });
+
+
+                              }
+                          },
+                          cancelAction: function() {
+                              $.alert('Time is Over');
+                          }
+                      }
+                  });
+
+              });
+              $("#btn_all_select").on("click", function() {
+
+                  $('input[type="checkbox"]').prop('checked', true);
+              });
+              $("#btn_all_unselect").on("click", function() {
+
+                  $('input[type="checkbox"]').prop('checked', false);
               });
           });
       </script>

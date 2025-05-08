@@ -1,7 +1,14 @@
 .image-gallery {
-    margin: 100px;
+    /* margin: 100px; */
     overflow: auto;
     height: 500px;
+    margin: 20px 100px 100px 100px;
+}
+
+.btn_down_dang {
+    margin-right: 120px;
+    margin-top: 40px;
+
 }
 
 #my-dropzone {
@@ -13,9 +20,15 @@
 }
 
 .dropzone {
-    min-height: 0px;
-    height: 99px !important;
+
+    height: 185px !important;
+    max-height: 500px;
+    max-width: 1200px !important;
+    width: 500px !important;
+
+
 }
+
 
 .file-upload {
     display: flex;
@@ -26,16 +39,18 @@
 
 .box1 {
     /* background: antiquewhite; */
-    width: 349px;
+    /* width: 349px; */
     margin: auto;
     box-shadow: 8px 15px 82px #d0d0d0;
     padding: 34px;
-    
+
 }
+
 i.bi.bi-download {
     margin: 12px;
     color: green;
 }
+
 /* .upload_gif {
     display: none;
 }
